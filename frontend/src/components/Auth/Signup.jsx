@@ -1,16 +1,22 @@
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import RoleCard from './RoleCard';
 
 const Signup = () => {
   const[selected, setSelected] = useState('candidate');
+  const navigate = useNavigate();
 
    const handleSelect = (role) => {
     setSelected(role); 
   };
 
+  const handleNext = () => {
+    navigate("/Detailform")
+  }
+
   return (
     <div className='Signup'>
+        <div className="signup-box">
         <h1>Create a new account</h1>
             <div className="ToselectCandidateorHost">
                  <RoleCard
@@ -26,9 +32,12 @@ const Signup = () => {
                       Already have an account?
                       <Link to="/" className="no-underline"> Login</Link>
                     </p>
-                    <button>Next</button>
+                    <button
+                    onClick={handleNext}
+                    >Next</button>
                   </div>
             </div>
+        </div>
     </div>
   )
 }
