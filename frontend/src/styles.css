@@ -6,14 +6,24 @@
   align-items: center;
 }
 
+.outline {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+
+}
+
+.center-text {
+  display: flex;
+  justify-content: center;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 20px;
-  border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* x, y, blur, color */
 }
 
 .login-form input {
@@ -29,8 +39,7 @@
 }
 
 .login-form button:active {
-    background-color: #0073E6
-;
+    background-color: #0073E6;
 }
 
 .no-underline {

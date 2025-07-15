@@ -4,16 +4,22 @@ import { RiUserSearchLine } from "react-icons/ri";
 
 function RoleCard(props) {
   const isCandidate = props.role === "candidate";
+  const isSelected = props.selectedRole === props.role;
 
   const cardStyle = {
-    backgroundColor: isCandidate ? '#ffefb7ff' : '#a9d0ffff'
-  }
+    backgroundColor: isCandidate ? '#ffefb7ff' : '#a9d0ffff',
+    border: isSelected
+      ? (isCandidate ? '3px solid #735903' : '3px solid #4b99f9')
+      : 'none',
+    cursor: 'pointer',
+  };
 
   return (
     <div 
-      className='rolecard'
-      style={cardStyle}
-      onClick={() => props.onSelect(props.role)}>
+      className='rolecard' 
+      style={cardStyle} 
+      onClick={() => props.onSelect(props.role)}
+    >
       <div className="icons">
         {isCandidate ? (
           <MdGroups size={38} color="#8c6d00" />

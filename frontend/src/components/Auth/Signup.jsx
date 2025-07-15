@@ -11,7 +11,7 @@ const Signup = () => {
   };
 
   const handleNext = () => {
-    navigate("/Detailform")
+    navigate(`/Detailform/${selected}`)
   }
 
   return (
@@ -22,10 +22,12 @@ const Signup = () => {
                  <RoleCard
                   role="candidate"
                   onSelect={handleSelect}
+                  selectedRole={selected}
                  />
                  <RoleCard
                   role="host"
                   onSelect={handleSelect}
+                  selectedRole={selected}
                  />
                   <div className="already-account">
                     <p>

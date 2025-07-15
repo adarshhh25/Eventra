@@ -3,8 +3,9 @@ import {Link} from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="center">
-      <h1>Log in</h1>
+    <div className="center"> 
+      <div className="outline">
+      <h1 className='center-text'>Log in</h1>
         <form className='login-form'>
             <input
             type='email'
@@ -18,10 +19,11 @@ const Login = () => {
             />
             <button>Login</button>
         </form>
-      <p className="signup-message">
+      <p className="center-text">
           Don't have an account? 
-          <Link to="/signup" className='no-underline'> Sign up</Link>
+          <Link to="/signup" className='no-underline'>Sign up</Link>
       </p>
+      </div>
     </div>
   )
 }
