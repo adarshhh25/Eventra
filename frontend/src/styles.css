@@ -113,3 +113,30 @@
     margin-bottom: 15px;
 }
 
+.Details-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.detail-form {
+  height: 40vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.detail-form h1 {
+  margin-top: 0px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
