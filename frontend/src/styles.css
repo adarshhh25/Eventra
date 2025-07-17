@@ -141,6 +141,11 @@
   flex-direction: column;
 }
 
-name-details{
-  display: inline;
+.name-details{
+   display: flex;
+   gap: 20px;
+}
+
+.small-input {
+  width: 200px; 
 }
