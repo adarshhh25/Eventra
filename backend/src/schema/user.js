@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
 
      lastname: {
         type: String,
-        required:  [true, 'Last Name is a required field.'],
         maxlength: 50
      },
 
@@ -35,14 +34,9 @@ const userSchema = new mongoose.Schema({
      password: {
         type: String,
         required:  [true, 'Password is a required field.']
-     },
-
-     confirmPassword: {
-        type: String,
-        required: [true, 'Confirm-Password is a required field.']
      }
 
 }, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+export default User;

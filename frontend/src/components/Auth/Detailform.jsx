@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 function Detailform() {
-  const { role } = useParams(); 
+  const { role } = useParams();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    password: "",
+    confirmPassword: ""
+  });
+
+  const handleChange = (e) => {
+       setFormData(prev => ({
+        ...prev,
+        [e.target.value]: e.target.value
+       }))
+  };
+
+  const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+           
+        } catch (error) {
+          
+        }
+  }
 
   return (
     <div className="details-form-container">
@@ -16,7 +42,7 @@ function Detailform() {
               <input id="first-name" name="firstName" type="text" placeholder="First Name" required />
             </div>
             <div className="form-group">
-              <label htmlFor="last-name">Last Name *</label>
+              <label htmlFor="last-name">Last Name </label>
               <input id="last-name" name="lastName" type="text" placeholder="Last Name" required />
             </div>
           </div>
@@ -55,7 +81,7 @@ function Detailform() {
             <p>
               Already have an account? <Link to="/">Login</Link>
             </p>
-            <button type="submit" className="submit-button">Next</button>
+            <button type="submit" className="submit-button" onClick={handleSubmit}>Next</button>
           </div>
           {/* <button type="submit" className="submit-btn">Next</button> */}
         </form>
