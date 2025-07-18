@@ -185,12 +185,18 @@ input:focus {
   margin-top: 8px;
 }
 
+.gender-options {
+  display: flex;
+  gap: 10px;
+}
+
 .gender-options button {
   flex: 1;
-  padding: 8px 12px;
+  margin-right: 0; /* gap handles spacing */
+  padding: 8px 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: white;
+  background-color: #f9f9f9;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -199,11 +205,12 @@ input:focus {
   background-color: #f0f0f0;
 }
 
-.already-account {
-  margin-top: 10px;
-  text-align: center;
-  margin: 0px;
+.gender-options button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
+
 
 .already-account a {
   color: #3b82f6;
