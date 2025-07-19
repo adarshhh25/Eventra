@@ -29,28 +29,27 @@ function Detailform() {
   };
 
   const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData)
-        try {
+  e.preventDefault();
+
+  try {
   const res = await fetch('http://localhost:5000/register', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'  // Fix 2: Correct casing
-    },
+      'Content-Type': 'application/json'  
+    },      
     body: JSON.stringify(formData)
   });
  
-  const result = await res.json();        // Fix 1: Matching variable names
-  console.log(result)
+  const result = await res.json();        
 
   if (res.ok) {
     alert("Account created successfully");
   } else {
     alert(`Error: ${result.message || "Something went wrong"}`);
   }
-} catch (err) {
+} catch (error) {
   alert("Network error or server not reachable");
-  console.error(err);
+  console.error(error);
 }
 
   }
@@ -58,7 +57,7 @@ function Detailform() {
   return (
     <div className="details-form-container">
       <div className="detail-form">
-        <h1>{role === "candidate" ? "Sign up as Candidate" : "Sign up as Recruiter"}</h1>
+        <h1>{role === "candidate" ? "Sign up as Candidate" : "Sign up as Host"}</h1>
         
         <form className="form">
           <div className="form-row">

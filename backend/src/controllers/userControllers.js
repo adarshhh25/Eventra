@@ -26,7 +26,7 @@ const userRegister = async(req, res) => {
 const userLogin = async (req, res) => {
     try {
         const {email, password} = req.body;
-    
+        
         if(!email || !password){
            return res.status(400).json({Message: "All fields are required"})
         }
