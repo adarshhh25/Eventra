@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-
-function Header() {
+function Header({onProfileClick}) {
   const [showDropdown, setShowDropdown] = useState(false);
+  const searchWrapperRef = useRef(null);
 
   const handleClick = () => {
-    setShowDropdown(prev => !prev);
+    setShowDropdown(true);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchWrapperRef.current &&
+        !searchWrapperRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className='main-div'>
       <div className='header'>
         <div className="eventra">Eventra</div>
 
-        <div className="search-wrapper">
+        <div className="search-wrapper" ref={searchWrapperRef}>
           <div className="search-opportunity">
             <span className="search-icon">🔍</span>
-            <input placeholder='Search Opportunities' onClick={handleClick} />
+            <input
+              placeholder='Search Opportunities'
+              onClick={handleClick}
+              className={showDropdown ? 'expanded' : ''}
+            />
           </div>
 
           {showDropdown && (
@@ -33,11 +54,12 @@ function Header() {
           )}
         </div>
 
-        <div className="events">
-          <div>Hackathons</div>
-          <div>Technical Events</div>
-          <div>Non-Technical Events</div>
+        <div className={`events ${showDropdown ? 'hidden' : ''}`}>
+          <Link to="/hackathons"><div>Hackathons</div></Link>
+          <Link to="/technical-events"><div>Technical Events</div></Link>
+          <Link to="/non-technical-events"><div>Non-Technical Events</div></Link>
         </div>
+
 
         <div className="Business">
           <button>➕ Host</button>
@@ -47,7 +69,7 @@ function Header() {
         <div className="icon-container">
           <img src="https://cdn.unstop.com/assets/icons/chat.svg" alt="Chat Icon" />
           <img src="https://cdn.unstop.com/assets/icons/notifications.svg" alt="Notification Icon" />
-          <div className="profile-icon">
+          <div className="profile-icon" onClick={onProfileClick}>
             <img src="/images/profile-icon.jpg" alt="avatar" className="image" />
           </div>
         </div>

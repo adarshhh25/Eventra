@@ -1,27 +1,31 @@
 import User from "../schema/user.js";
-const userRegister = async(req, res) => {
-    try {
-        const {firstName, lastName, email, phone, gender, password, confirmPassword} = req.body;
+import bcrypt from "bcrypt";
 
-        if(!firstName || !email || !phone || !gender) {
-            return res.status(400).json({Message: "Some Field is Missing"});
-        }
+const userRegister = async (req, res) => {
+  try {
+    const { firstName, lastName, email, phone, gender, password, confirmPassword } = req.body;
 
-        if(await User.findOne({email})) {
-           return res.status(409).json({Message: "User Already Exists. Try with another Email"});
-        }
-  
-        if(password !== confirmPassword) {
-            return res.status(400).json({Message: "Your password & confirm-password did not match"});
-        }
-   
-        const newUser = await User.create({firstName, lastName, email, phone, gender, password});
-
-        return res.status(200).json({Message: "User created Successfully", user: newUser});
-    } catch (error) {
-        res.status(500).json({ Message: "Failed creating an Account", error });
+    if (!firstName || !email || !phone || !gender || !password || !confirmPassword) {
+      return res.status(400).json({ Message: "All fields are required" });
     }
+
+    if (await User.findOne({ email })) {
+      return res.status(409).json({ Message: "User already exists" });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ Message: "Passwords do not match" });
+    }
+
+    const newUser = new User({ firstName, lastName, email, phone, gender, password });
+    await newUser.save();
+
+    res.status(201).json({ Message: "User registered successfully", user: newUser });
+  } catch (error) {
+    res.status(500).json({ Message: "Error registering user", error });
+  }
 };
+
 
 const userLogin = async (req, res) => {
     try {
@@ -32,9 +36,15 @@ const userLogin = async (req, res) => {
         }
     
         const user = await User.findOne({email});
+        
+        if(!user){
+           return res.status(400).json({Message: "User not Found"})
+        }
 
-        if(!user || (user.password != password)){
-           return res.status(400).json({Message: "Something went wrong"})
+        const isModified = await bcrypt.compare(password, user.password);
+        
+        if(!isModified) {
+           return res.status(401).json({Message: "Invalid Credentials"})
         }
 
         return res.status(200).json({Message: "Logged in Successfully"})

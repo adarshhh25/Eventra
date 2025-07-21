@@ -245,6 +245,7 @@ input:focus {
 
 /* HEADER*/
 
+/* Wrapper covering full width */
 .main-div {
   width: 100%;
   background-color: white;
@@ -252,6 +253,7 @@ input:focus {
   z-index: 1;
 }
 
+/* Header bar layout */
 .header {
   display: flex;
   justify-content: space-between;
@@ -259,30 +261,43 @@ input:focus {
   padding: 10px 20px;
   border-bottom: 2px solid black;
   position: relative;
+  background-color: rgb(11, 212, 238);
 }
 
+/* Brand logo/text */
 .eventra {
   font-size: 1.5rem;
   font-weight: bold;
+  white-space: nowrap;
 }
 
+/* Container for search */
 .search-wrapper {
   position: relative;
+  flex-shrink: 0;
 }
 
+/* Search input wrapper */
 .search-opportunity {
   position: relative;
 }
 
+/* Input base styles */
 .search-opportunity input {
   padding: 6px 12px 6px 30px;
   border: 2px solid black;
   border-radius: 20px;
   color: gray;
   width: 200px;
-  transition: all 0.2s ease-in-out;
+  transition: width 0.3s ease, background-color 0.2s ease;
 }
 
+/* Expanded input width */
+.search-opportunity input.expanded {
+  width: 300px;
+}
+
+/* Search icon inside input */
 .search-icon {
   position: absolute;
   left: 8px;
@@ -290,6 +305,7 @@ input:focus {
   transform: translateY(-50%);
 }
 
+/* Dropdown panel */
 .search-dropdown {
   position: absolute;
   top: 110%;
@@ -298,23 +314,26 @@ input:focus {
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 16px;
-  width: 350px;
+  width: 300px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
   transition: all 0.3s ease-in-out;
 }
 
+/* Dropdown header */
 .dropdown-title {
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+/* Tags section in dropdown */
 .dropdown-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
+/* Each tag */
 .dropdown-tags span {
   padding: 6px 12px;
   background-color: #f3f3f3;
@@ -328,17 +347,27 @@ input:focus {
   background-color: #e0e0e0;
 }
 
+/* Events section */
 .events {
   display: flex;
   gap: 20px;
   margin-left: 10px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+/* Hide visually but keep layout */
+.events.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Business section */
 .Business {
   display: flex;
   gap: 16px;
 }
 
+/* Buttons inside business section */
 .Business button {
   border-radius: 18px;
   padding: 6px 12px;
@@ -352,6 +381,7 @@ input:focus {
   background-color: #f5f5f5;
 }
 
+/* Icons on the right */
 .icon-container {
   display: flex;
   align-items: center;
@@ -359,6 +389,7 @@ input:focus {
   padding: 10px;
 }
 
+/* Icons inside icon container */
 .icon-container img {
   width: 24px;
   height: 24px;
@@ -370,10 +401,36 @@ input:focus {
   transform: scale(1.1);
 }
 
+/* Profile image styling */
 .profile-icon .image {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ccc;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
 }
